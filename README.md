@@ -26,12 +26,12 @@ sudo apt install git -y
 
 Generate an SSH key pair on your VPS:
 ```bash
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/ajmain
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/deploy
 ```
 
 Press Enter when prompted to confirm the path. You’ll get two files:
-- Private key: `~/.ssh/ajmain`
-- Public key: `~/.ssh/ajmain.pub`
+- Private key: `~/.ssh/deploy`
+- Public key: `~/.ssh/deploy.pub`
 
 ---
 
@@ -39,11 +39,11 @@ Press Enter when prompted to confirm the path. You’ll get two files:
 
 1. Append the public key to authorized keys:
   ```bash
-  cat ~/.ssh/ajmain.pub >> ~/.ssh/authorized_keys
+  cat ~/.ssh/deploy.pub >> ~/.ssh/authorized_keys
   ```
 2. Display the public key:
   ```bash
-  cat ~/.ssh/ajmain.pub
+  cat ~/.ssh/deploy.pub
   ```
 3. Go to **GitHub → Settings → SSH and GPG keys**
 4. Click **"New SSH Key"**
@@ -59,7 +59,7 @@ Press Enter when prompted to confirm the path. You’ll get two files:
 
   - If you have multiple SSH keys, specify the key explicitly:
   ```bash
-  ssh -T -i ~/.ssh/ajmain git@github.com
+  ssh -T -i ~/.ssh/deploy git@github.com
   ```
 
   A successful connection will display a message like:
@@ -73,7 +73,7 @@ Press Enter when prompted to confirm the path. You’ll get two files:
 
 ### For Single User Repositories:
 ```bash
-cd /www/wwwroot/test.mirpurianscafe.com
+cd /www/wwwroot/test.deploy.com
 git clone git@github.com:MahfujuRahman/cd.git .
 ```
 
@@ -89,21 +89,21 @@ nano ~/.ssh/config
 Add the following configuration:
 
 ```ssh
-Host github.com-ajmain
+Host github.com-deploy
   HostName github.com
   User git
-  IdentityFile ~/.ssh/ajmain
+  IdentityFile ~/.ssh/deploy
 ```
 
 #### Clone the Repository Using the Alias:
 ```bash
 cd /www/wwwroot/test.mirpurianscafe.com
-git clone git@github.com-ajmain:MahfujuRahman/Superb-Backend.git .
+git clone git@github.com-deploy:brownbeavers/Superb-Backend.git .
 ```
 
 #### Test the SSH Connection:
 ```bash
-ssh -T git@github.com-ajmain
+ssh -T git@github.com-deploy
 ```
 A successful connection will display a message like:
 ```
@@ -165,7 +165,7 @@ Click **"New repository secret"** for each of the following:
 
 | Name              | Value                                                       |
 |-------------------|-------------------------------------------------------------|
-| `SSH_PRIVATE_KEY` | Content of `~/.ssh/ajmain` (the **private key**, not `.pub`) |
+| `SSH_PRIVATE_KEY` | Content of `~/.ssh/deploy` (the **private key**, not `.pub`) |
 | `VPS_HOST`        | Your VPS IP (e.g., `20.2.4.20`)                             |
 | `VPS_USER`        | Your SSH username (e.g., `root`)                            |
 | `PROJECT_PATH`    | Path to your project on VPS (e.g., `/www/wwwroot/test.mirpurianscafe.com`) |
